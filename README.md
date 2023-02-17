@@ -135,12 +135,12 @@ liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff  -u
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```
 
-### Extract cds sequences for genes using AGAT extract_sequences and the use BEDOPS gfftobed:
+### Create Bed file for genes using BEDOPS gff2bed. Extract cds sequences for genes using AGAT extract_sequences:
 Example shown with UA44 sequence data 
 
-https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html
-
 https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html
+
+https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html
 
 ```{}
 awk '$3=="mRNA" {print}'   UA44_ragtag.scaffolds.gff >   UA44_ragtag.scaffolds_gene.gff

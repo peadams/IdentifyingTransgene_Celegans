@@ -128,3 +128,8 @@ blastn \
 After BLAST, remove contigs that did not align to *Caenorhabditis*
 
 ### Scaffold with RagTag: 
+```{}
+ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  UA44_flye_keptcontigs.fasta # ragtagskip.txt lists contig_59
+ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  BY250_flye_keptcontigs.fasta # ragtagskip.txt lists contig_86
+
+```

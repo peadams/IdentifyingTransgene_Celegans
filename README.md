@@ -108,7 +108,7 @@ minimap2  -a ragtag.scaffold.fasta  insertion.fasta > BY250_ragtag_insertion.sam
 blastn -num_threads 12  -query UA44_insertion.fasta -subject UA44_genome_final.fasta
 blastn -num_threads 12  -query insertion.fasta -subject BY250_genome_final.fasta
 ```
-Figures were then created with gggenomes: https://github.com/thackl/gggenomes
+Figures were then created in Rstudio with gggenomes (an extension of [ggplot2]{https://ggplot2.tidyverse.org/}): https://github.com/thackl/gggenomes
 
 ### Genome Quality Assessment Quast and Busco:
 Both quality control steps were ran at many stages through analysis. Example script shown here. 

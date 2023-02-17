@@ -13,8 +13,6 @@ Here, we sequence and assemble two transgenic strains of Caenorhabditis elegans 
 
 ## Analyses
 
-
-
 # Trim adaptors with porechop: https://github.com/rrwick/Porechop
 porechop -i fastqs/UA44_alldata.fastq -o fastqs/UA44_alldata_TRIMMED.fastq --discard_middle 
 

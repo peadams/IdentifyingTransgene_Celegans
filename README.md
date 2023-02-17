@@ -113,7 +113,9 @@ blastn -num_threads 12  -query insertion.fasta -subject BY250_genome_final.fasta
 
 ### Genome Quality Assessment Quast and Busco:
 Both quality control steps were ran at many stages through analysis. Example script shown here. 
+
 https://quast.sourceforge.net/
+
 https://busco.ezlab.org/
 
 ```{}
@@ -124,4 +126,10 @@ python quast.py -t 12 --plots-format pdf -r aenorhabditis_elegans.WBcel235.dna.t
 ## Busco
 busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_UA44_ragtag_correction_skip --lineage_dataset nematoda_odb10 --config config.ini --update-data
 busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_BY250_ragtag_correction_skip --lineage_dataset nematoda_odb10 --config config.ini --update-data
+```
+
+### Genome Annotation with Liftoff
+```{}
+liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff -u UA44_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta  Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
+liftoff -p 8 -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.scaffolds.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```

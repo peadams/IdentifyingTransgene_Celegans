@@ -11,10 +11,9 @@ Here, we sequence and assemble two transgenic strains of *Caenorhabditis elegans
 ## Data Availability 
 |||
 | --- | --- |
-| UA44 | BioProject:PRJNA627736 |
-| BY250 | BioProject:PRJNA627737 |
+| UA44 | [https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736](BioProject:PRJNA627736) |
+| BY250 | [https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737](BioProject:PRJNA627737) |
 | Illumina data used | BioProject:PRJDB2670, Accession: DRX007632 |
-
 
 ## Analyses
 

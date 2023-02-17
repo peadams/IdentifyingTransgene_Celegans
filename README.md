@@ -17,7 +17,9 @@ Here, we sequence and assemble two transgenic strains of Caenorhabditis elegans 
 
 ### Trim adaptors with porechop: 
 https://github.com/rrwick/Porechop
+```{}
 porechop -i fastqs/UA44_alldata.fastq -o fastqs/UA44_alldata_TRIMMED.fastq --discard_middle 
+```
 
 ### Correct reads with Canu: https://canu.readthedocs.io/en/latest/index.html
 /data/jdmillwood/anaconda3/bin/./canu -p UA44 -d /data/peadams/UA44/canu_runs genomeSize=100m -nanopore-raw /data/peadams/inbreeding/UA44/fastqs/UA44_alldata_TRIMMED.fastq

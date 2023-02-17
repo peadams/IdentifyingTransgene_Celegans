@@ -17,32 +17,32 @@ Here, we sequence and assemble two transgenic strains of *Caenorhabditis elegans
 
 ## Analyses
 
-### Trim adaptors with [porechop]{https://github.com/rrwick/Porechop}: 
+### Trim adaptors with [porechop](https://github.com/rrwick/Porechop): 
 ```{}
 porechop -i fastqs/UA44_alldata.fastq  -o fastqs/UA44_alldata_TRIMMED.fastq  --discard_middle 
 porechop -i fastqs/BY250_alldata.fastq -o fastqs/BY250_alldata_TRIMMED.fastq --discard_middle 
 ```
 
-### Correct reads with [Canu]{https://canu.readthedocs.io/en/latest/index.html}: 
+### Correct reads with [Canu](https://canu.readthedocs.io/en/latest/index.html): 
 ```{}
 canu -p UA44  -d /UA44/canu_runs  genomeSize=100m -nanopore-raw /path/UA44/fastqs/UA44_alldata_TRIMMED.fastq
 canu -p BY250 -d /BY250/canu_runs genomeSize=100m -nanopore-raw /path/BY250/fastqs/BY250_alldata_TRIMMED.fastq
 ```
 
-### Assemble genomes using Canu-corrected reads with [Flye]{https://github.com/fenderglass/Flye}: 
+### Assemble genomes using Canu-corrected reads with [Flye](https://github.com/fenderglass/Flye): 
 ```{}
 flye  -t 48 --genome-size 100m --nano-corr UA44.correctedReads.fasta --out-dir /path/UA44/flye/
 flye  -t 48 --genome-size 100m --nano-corr BY250.correctedReads.fasta --out-dir /path/BY250/flye/
 ```
 
-### Simulate short-read data for transgene insertion using [ART]{https://www.niehs.nih.gov/research/resources/software/biostatistics/art/index.cfm}:
+### Simulate short-read data for transgene insertion using [ART](https://www.niehs.nih.gov/research/resources/software/biostatistics/art/index.cfm):
 ```{}
 art_illumina -ss HS25 -sam -i UA44_insertion.fasta -l 150 -f 100 -p -m 270 -s 30 -o insertion_lib_UA44
 art_illumina -ss HS25 -sam -i Expression_vector_unc68_GFP.fasta -l 150 -f 100 -p -m 270 -s 30 -o insertion_lib_BY250
 ```
 After simulating short-reads for the transgenes, these simulated libraries were added to our downloaded illumina data for N2: BioProject:PRJDB2670. 
 
-### Polish genomes with illumina data using [Pilon]{https://github.com/broadinstitute/pilon} x4: 
+### Polish genomes with illumina data using [Pilon](https://github.com/broadinstitute/pilon) x4: 
 Example for UA44 shown here
 ```{}
 ##ROUND1
@@ -77,7 +77,7 @@ blastn \
 ```
 After BLAST, remove contigs that did not align to *Caenorhabditis*
 
-### Scaffold with [RagTag]{https://github.com/malonge/RagTag}: 
+### Scaffold with [RagTag](https://github.com/malonge/RagTag): 
 
 RagTag scaffolds assemblies based on a reference genome and can correct missasemblies. We used the "correct" option with the -j flag to protect the contigs containing the transgene insertions from being incorrectly corrected when compared to the reference. 
 For UA44 ragtagskip.txt listed contig_59
@@ -87,7 +87,7 @@ ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel
 ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  BY250_flye_keptcontigs.fasta 
 ```
 
-### Identify insertion location with [minimap2]{https://github.com/lh3/minimap2} and BLAST
+### Identify insertion location with [minimap2](https://github.com/lh3/minimap2) and BLAST
 ```{}
 ## Pre-scaffolded assembly
 minimap2  -a UA44_pilon4_keptcontigs.fasta UA44_insertion.fasta > UA44_instertion.sam 
@@ -101,9 +101,9 @@ minimap2  -a ragtag.scaffold.fasta  insertion.fasta > BY250_ragtag_insertion.sam
 blastn -num_threads 12  -query UA44_insertion.fasta -subject UA44_genome_final.fasta
 blastn -num_threads 12  -query insertion.fasta -subject BY250_genome_final.fasta
 ```
-Figures were then created in Rstudio with [gggenomes]{https://github.com/thackl/gggenomes} (an extension of [ggplot2]{https://ggplot2.tidyverse.org/}). 
+Figures were then created in Rstudio with [gggenomes](https://github.com/thackl/gggenomes) (an extension of [ggplot2](https://ggplot2.tidyverse.org/)). 
 
-### Genome Quality Assessment [Quast]{https://quast.sourceforge.net/} and [Busco]{https://busco.ezlab.org/}:
+### Genome Quality Assessment [Quast](https://quast.sourceforge.net/) and [Busco](https://busco.ezlab.org/):
 Both quality control steps were ran at many stages through analysis. Example script shown here. 
 ```{}
 ## Quast
@@ -115,13 +115,13 @@ busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_UA44_ragtag_correcti
 busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_BY250_ragtag_correction_skip --lineage_dataset nematoda_odb10 --config config.ini --update-data
 ```
 
-### Genome Annotation with [Liftoff]{https://github.com/agshumate/Liftoff}:
+### Genome Annotation with [Liftoff](https://github.com/agshumate/Liftoff):
 ```{}
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff  -u UA44_ragtag_skip_unmapped_features.txt   -m minimap2 ragtag.scaffold.fasta  Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```
 
-### Create Bed file for genes using BEDOPS [gff2bed]{https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html}. Extract cds sequences for genes using [AGAT extract_sequences]{https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html}:
+### Create Bed file for genes using BEDOPS [gff2bed](https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html). Extract cds sequences for genes using [AGAT extract_sequences](https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html):
 Example shown with UA44 sequence data 
 ```{}
 awk '$3=="mRNA" {print}'   UA44_ragtag.scaffolds.gff >   UA44_ragtag.scaffolds_gene.gff
@@ -142,7 +142,7 @@ python -m jcvi.formats.fasta format UA44_scaffold.cds.fasta UA44_scaffold.cds &
 ```
 
 
-### Synteny Analysis with [MCscan (python version)]{https://github.com/tanghaibao/jcvi/wiki/MCscan-(Python-version)}:
+### Synteny Analysis with [MCscan (python version)](https://github.com/tanghaibao/jcvi/wiki/MCscan-(Python-version)):
 Using the 6 largest linkage groups (Chromosomes I, II, III, IV, V, & X), synteny mapping was performed between each genome (UA44 & BY250) with the N2 reference. UA44 and N2 example shown below. 
 
 

@@ -128,8 +128,55 @@ busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_UA44_ragtag_correcti
 busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_BY250_ragtag_correction_skip --lineage_dataset nematoda_odb10 --config config.ini --update-data
 ```
 
-### Genome Annotation with Liftoff
+### Genome Annotation with Liftoff:
+https://github.com/agshumate/Liftoff
 ```{}
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff  -u UA44_ragtag_skip_unmapped_features.txt   -m minimap2 ragtag.scaffold.fasta  Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```
+
+### Extract cds sequences for genes using AGAT extract_sequences and the use BEDOPS gfftobed:
+https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html
+
+https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html
+
+```{}
+awk '$3=="mRNA" {print}'   UA44_ragtag.scaffolds.gff >   UA44_ragtag.scaffolds_gene.gff
+
+gff2bed < UA44_ragtag.scaffolds_gene.gff > UA44_ragtag.scaffolds_gene.gff.bed
+
+#format it 
+cat UA44_ragtag.scaffolds_gene.gff.bed | awk '$8=="mRNA" {print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6}' | sed 's/:/\t/g' | awk '{print $1"\t"$2"\t"$3"\t"$5"\t"0"\t"$7}'  > UA44_ragtag.scaffolds_gene.gff.bed.test
+
+mv UA44_ragtag.scaffolds_gene.gff.bed.test  UA44_scaffold.bed
+
+# Type: conda activate agatenv
+agat_sp_extract_sequences.pl -g  UA44_ragtag.scaffolds_gene.gff -f  UA44_ragtag.scaffolds.fasta  -t mRNA -o UA44_scaffold.cds.fasta
+
+python -m jcvi.formats.fasta format UA44_scaffold.cds.fasta UA44_scaffold.cds & 
+
+# fix contig names with sed
+```
+
+
+### Synteny Analysis with MCscan (python versin):
+
+MCscan time
+
+python -m jcvi.compara.catalog ortholog N2 UA44_scaffold  --no_strip_names & 
+
+python -m jcvi.compara.synteny depth --histogram  N2.UA44_scaffold.anchors 
+
+#make seqids and layout files 
+python -m jcvi.compara.synteny screen --minspan=0 --simple N2.UA44_scaffold.anchors N2.UA44_scaffold.anchors.new
+
+
+python -m jcvi.graphics.karyotype seqids layout
+
+
+awk 'NR==FNR{e[$1]=1;next};e[$4]' N2_features.txt N2.bed > N2_features_location.txt
+
+awk 'NR==FNR{e[$1]=1;next};e[$4]' UA44_features.txt UA44_scaffold.bed > UA44_features_location.txt
+
+
+

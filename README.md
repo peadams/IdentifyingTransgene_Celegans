@@ -13,7 +13,6 @@ Here, we sequence and assemble two transgenic strains of *Caenorhabditis elegans
 | --- | --- |
 | UA44 | [BioProject:PRJNA627736](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736) |
 | BY250 | [BioProject:PRJNA627737](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737) |
-| Illumina data used | BioProject:PRJDB2670, Accession: DRX007632 |
 
 ## Analyses
 
@@ -40,7 +39,7 @@ flye  -t 48 --genome-size 100m --nano-corr BY250.correctedReads.fasta --out-dir 
 art_illumina -ss HS25 -sam -i UA44_insertion.fasta -l 150 -f 100 -p -m 270 -s 30 -o insertion_lib_UA44
 art_illumina -ss HS25 -sam -i Expression_vector_unc68_GFP.fasta -l 150 -f 100 -p -m 270 -s 30 -o insertion_lib_BY250
 ```
-After simulating short-reads for the transgenes, these simulated libraries were added to our downloaded illumina data for N2: BioProject:PRJDB2670. 
+After simulating short-reads for the transgenes, these simulated libraries were added to our downloaded illumina data for N2: [BioProject:PRJDB2670](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJDB2670). 
 
 ### Polish genomes with illumina data using [Pilon](https://github.com/broadinstitute/pilon) x4: 
 Example for UA44 shown here

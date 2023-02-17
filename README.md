@@ -49,6 +49,7 @@ art_illumina -ss HS25 -sam -i Expression_vector_unc68_GFP.fasta -l 150 -f 100 -p
 After simulating short-reads for the transgenes, these simulated libraries were added to our downloaded illumina data for N2: BioProject:PRJDB2670. 
 
 ### Polish genomes with illumina data using Pilon x4: 
+Example for UA44 shown here
 https://github.com/broadinstitute/pilon
 ```{}
 ##ROUND1
@@ -65,53 +66,9 @@ samtools index ./pilon/UA44_flye_bwa.sort.bam
 
 #run pilon
 java -Xmx300G -jar pilon-1.23-0/pilon-1.23.jar --genome ./flye/assembly.fasta --frags  ./pilon/UA44_flye_bwa.sort.bam --output ./pilon/UA44_flye_pilon1
-
-##ROUND2
-#index genome
-bwa index ./pilon/UA44_flye_pilon1.fasta
-#align reads to reference    
-bwa mem -M -t 48  ./pilon/UA44_flye_pilon1.fasta ./illumina_fastq/DR_insertion1.fastq  ./illumina_fastq/DR_insertion2.fastq > ./pilon/UA44_flye_bwa.sam
-#sam to bam
-samtools view -Sb ./pilon/UA44_flye_bwa.sam  > ./pilon/UA44_flye_bwa.bam
-
-#Sort and index the BAM
-samtools sort ./pilon/UA44_flye_bwa.bam -o ./pilon/UA44_flye_bwa.sort.bam
-samtools index ./pilon/UA44_flye_bwa.sort.bam
-
-#run pilon
-java -Xmx300G -jar pilon-1.23-0/pilon-1.23.jar --genome ./pilon/UA44_flye_pilon1.fasta  --frags  ./pilon/UA44_flye_bwa.sort.bam --output ./pilon/UA44_flye_pilon2
-
-##ROUND3
-#index genome
-bwa index ./pilon/UA44_flye_pilon2.fasta
-#align reads to reference    
-bwa mem -M -t 48  ./pilon/UA44_flye_pilon2.fasta ./illumina_fastq/DR_insertion1.fastq  ./illumina_fastq/DR_insertion2.fastq > ./pilon/UA44_flye_bwa.sam
-#sam to bam
-samtools view -Sb ./pilon/UA44_flye_bwa.sam  > ./pilon/UA44_flye_bwa.bam
-
-#Sort and index the BAM
-samtools sort ./pilon/UA44_flye_bwa.bam -o ./pilon/UA44_flye_bwa.sort.bam
-samtools index ./pilon/UA44_flye_bwa.sort.bam
-
-#run pilon
-java -Xmx300G -jar pilon-1.23-0/pilon-1.23.jar --genome ./pilon/UA44_flye_pilon2.fasta  --frags  ./pilon/UA44_flye_bwa.sort.bam --output ./pilon/UA44_flye_pilon3
-
-
-##ROUND4
-#index genome
-bwa index ./pilon/UA44_flye_pilon3.fasta
-#align reads to reference    
-bwa mem -M -t 48  ./pilon/UA44_flye_pilon3.fasta ./illumina_fastq/DR_insertion1.fastq  ./illumina_fastq/DR_insertion2.fastq > ./pilon/UA44_flye_bwa.sam
-#sam to bam
-samtools view -Sb ./pilon/UA44_flye_bwa.sam  > ./pilon/UA44_flye_bwa.bam
-
-#Sort and index the BAM
-samtools sort ./pilon/UA44_flye_bwa.bam -o ./pilon/UA44_flye_bwa.sort.bam
-samtools index ./pilon/UA44_flye_bwa.sort.bam
-
-#run pilon
-java -Xmx300G -jar pilon-1.23.jar --genome ./pilon/UA44_flye_pilon3.fasta  --frags  ./pilon/UA44_flye_bwa.sort.bam --output ./pilon/UA44_flye_pilon4
 ```
+UA44_flye_pilon1.fasta is then used for round 2. Repeat for 4 total rounds of Pilon.
+
 
 ### Decontaminate with BLAST:
 ```{}
@@ -152,4 +109,19 @@ minimap2  -a ragtag.scaffold.fasta  insertion.fasta > BY250_ragtag_insertion.sam
 ## BLASTn
 blastn -num_threads 12  -query UA44_insertion.fasta -subject UA44_genome_final.fasta
 blastn -num_threads 12  -query insertion.fasta -subject BY250_genome_final.fasta
+```
+
+### Genome Quality Assessment Quast and Busco:
+Both quality control steps were ran at many stages through analysis. Example script shown here. 
+https://quast.sourceforge.net/
+https://busco.ezlab.org/
+
+```{}
+## Quast
+python quast.py -t 12 --plots-format pdf -r Caenorhabditis_elegans.WBcel235.dna.toplevel.fa ragtag.scaffold.fasta -o ./quast_NEW_UA44_ragtag_correctionskip
+python quast.py -t 12 --plots-format pdf -r aenorhabditis_elegans.WBcel235.dna.toplevel.fa ragtag.scaffold.fasta   -o ./quast_BY250_NEW_ragtag_correction_skip
+
+## Busco
+busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_UA44_ragtag_correction_skip --lineage_dataset nematoda_odb10 --config config.ini --update-data
+busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_BY250_ragtag_correction_skip --lineage_dataset nematoda_odb10 --config config.ini --update-data
 ```

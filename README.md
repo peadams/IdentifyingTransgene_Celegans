@@ -136,6 +136,8 @@ liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u
 ```
 
 ### Extract cds sequences for genes using AGAT extract_sequences and the use BEDOPS gfftobed:
+Example shown with UA44 sequence data 
+
 https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html
 
 https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html
@@ -159,9 +161,15 @@ python -m jcvi.formats.fasta format UA44_scaffold.cds.fasta UA44_scaffold.cds &
 ```
 
 
-### Synteny Analysis with MCscan (python versin):
+### Synteny Analysis with MCscan (python version):
+Using the 6 largest linkage groups (Chromosomes I, II, III, IV, V, & X), synteny mapping was performed between each genome (UA44 & BY250) with the N2 reference. UA44 and N2 example shown below. 
 
-MCscan time
+https://github.com/tanghaibao/jcvi/wiki/MCscan-(Python-version)
+
+```{}
+python -m jcvi.formats.fasta format UA44.cds.fasta UA44.cds & 
+python -m jcvi.formats.fasta format N2.cds.fasta N2.cds & 
+
 
 python -m jcvi.compara.catalog ortholog N2 UA44_scaffold  --no_strip_names & 
 
@@ -170,13 +178,8 @@ python -m jcvi.compara.synteny depth --histogram  N2.UA44_scaffold.anchors
 #make seqids and layout files 
 python -m jcvi.compara.synteny screen --minspan=0 --simple N2.UA44_scaffold.anchors N2.UA44_scaffold.anchors.new
 
-
 python -m jcvi.graphics.karyotype seqids layout
-
-
-awk 'NR==FNR{e[$1]=1;next};e[$4]' N2_features.txt N2.bed > N2_features_location.txt
-
-awk 'NR==FNR{e[$1]=1;next};e[$4]' UA44_features.txt UA44_scaffold.bed > UA44_features_location.txt
+```
 
 
 

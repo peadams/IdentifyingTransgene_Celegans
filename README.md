@@ -121,7 +121,7 @@ liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff  -u
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```
 
-### Create Bed file for genes using BEDOPS [gff2bed](https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html). Extract cds sequences for genes using [AGAT extract_sequences](https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html):
+### Create Bed file for genes using BEDOPS [gff2bed](https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html): 
 Example shown with UA44 sequence data 
 ```{}
 awk '$3=="mRNA" {print}'   UA44_ragtag.scaffolds.gff >   UA44_ragtag.scaffolds_gene.gff
@@ -132,7 +132,10 @@ gff2bed < UA44_ragtag.scaffolds_gene.gff > UA44_ragtag.scaffolds_gene.gff.bed
 cat UA44_ragtag.scaffolds_gene.gff.bed | awk '$8=="mRNA" {print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6}' | sed 's/:/\t/g' | awk '{print $1"\t"$2"\t"$3"\t"$5"\t"0"\t"$7}'  > UA44_ragtag.scaffolds_gene.gff.bed.test
 
 mv UA44_ragtag.scaffolds_gene.gff.bed.test  UA44_scaffold.bed
+```
 
+### Extract cds sequences for genes using [AGAT extract_sequences](https://agat.readthedocs.io/en/latest/tools/agat_sp_extract_sequences.html):
+```{}
 # Type: conda activate agatenv
 agat_sp_extract_sequences.pl -g  UA44_ragtag.scaffolds_gene.gff -f  UA44_ragtag.scaffolds.fasta  -t mRNA -o UA44_scaffold.cds.fasta
 

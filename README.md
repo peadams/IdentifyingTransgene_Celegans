@@ -1,4 +1,4 @@
-# Identifying transgene insertions in Caenorhabditis elegans genomes with Oxford Nanopore sequencing
+# Identifying transgene insertions in *Caenorhabditis elegans* genomes with Oxford Nanopore sequencing
 
 Paula E. Adams*, John M. Sutton, Jenny L. Thies, Josh D. Millwood, Guy A. Caldwell, Kim A. Caldwell, and Janna L. Fierst
 
@@ -6,7 +6,7 @@ Paula E. Adams*, John M. Sutton, Jenny L. Thies, Josh D. Millwood, Guy A. Caldwe
 
 
 ## Project Summary:
-Here, we sequence and assemble two transgenic strains of Caenorhabditis elegans used in neurodegeneration research, BY250 and UA44. We use a combination of empirically generated ONT long-read DNA sequences, publicly available Illumina short-read DNA libraries, simulated Illumina transgene libraries and reference-based scaffolding to assemble high-quality genome sequences. Our method achieves chromosome-level assemblies with high similarity to the C. elegans N2 reference genome. We identify the locations of the transgene insertions and confirm that all transgene sequences were inserted in intergenic regions, leaving the organismal gene content intact. Our work demonstrates that long-read sequencing is a fast, cost-effective way to assemble genome sequences and aid in the identification of transgenic insertions in model organism research
+Here, we sequence and assemble two transgenic strains of *Caenorhabditis elegans* used in neurodegeneration research, BY250 and UA44. We use a combination of empirically generated ONT long-read DNA sequences, publicly available Illumina short-read DNA libraries, simulated Illumina transgene libraries and reference-based scaffolding to assemble high-quality genome sequences. Our method achieves chromosome-level assemblies with high similarity to the *C. elegans* N2 reference genome. We identify the locations of the transgene insertions and confirm that all transgene sequences were inserted in intergenic regions, leaving the organismal gene content intact. Our work demonstrates that long-read sequencing is a fast, cost-effective way to assemble genome sequences and aid in the identification of transgenic insertions in model organism research
 
 ## Data
 #### UA44 
@@ -48,9 +48,8 @@ art_illumina -ss HS25 -sam -i Expression_vector_unc68_GFP.fasta -l 150 -f 100 -p
 ```
 After simulating short-reads for the transgenes, these simulated libraries were added to our downloaded illumina data for N2: BioProject:PRJDB2670. 
 
-### Polish genomes with Pilon x4: 
+### Polish genomes with illumina data using Pilon x4: 
 https://github.com/broadinstitute/pilon
-
 ```{}
 ##ROUND1
 #index genome
@@ -126,6 +125,6 @@ blastn \
 -max_target_seqs 2 \
 -out blast_UA44total.out
 ```
-After BLAST, remove contigs that did not align to \italics{Caenorhabditis}
+After BLAST, remove contigs that did not align to *Caenorhabditis*
 
 ### Scaffold with RagTag: 

@@ -18,17 +18,20 @@ Here, we sequence and assemble two transgenic strains of Caenorhabditis elegans 
 ### Trim adaptors with porechop: 
 https://github.com/rrwick/Porechop
 ```{}
-porechop -i fastqs/UA44_alldata.fastq -o fastqs/UA44_alldata_TRIMMED.fastq --discard_middle 
+porechop -i fastqs/UA44_alldata.fastq  -o fastqs/UA44_alldata_TRIMMED.fastq  --discard_middle 
+porechop -i fastqs/BY250_alldata.fastq -o fastqs/BY250_alldata_TRIMMED.fastq --discard_middle 
 ```
 
 ### Correct reads with Canu: 
 https://canu.readthedocs.io/en/latest/index.html
 ```{}
-/data/jdmillwood/anaconda3/bin/./canu -p UA44 -d /data/peadams/UA44/canu_runs genomeSize=100m -nanopore-raw /data/peadams/inbreeding/UA44/fastqs/UA44_alldata_TRIMMED.fastq
-
+canu -p UA44  -d /UA44/canu_runs  genomeSize=100m -nanopore-raw /path/UA44/fastqs/UA44_alldata_TRIMMED.fastq
+canu -p BY250 -d /BY250/canu_runs genomeSize=100m -nanopore-raw /path/BY250/fastqs/BY250_alldata_TRIMMED.fastq
+```
 
 ### Assemble genomes using Canu-corrected reads with Flye: 
 https://github.com/fenderglass/Flye
 ```{}
-flye  -t 48 --genome-size 100m --nano-corr UA44.correctedReads.fasta --out-dir /data/peadams/UA44/flye/
+flye  -t 48 --genome-size 100m --nano-corr UA44.correctedReads.fasta --out-dir /path/UA44/flye/
+flye  -t 48 --genome-size 100m --nano-corr BY250.correctedReads.fasta --out-dir /path/BY250/flye/
 ```

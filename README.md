@@ -128,8 +128,11 @@ blastn \
 After BLAST, remove contigs that did not align to *Caenorhabditis*
 
 ### Scaffold with RagTag: 
+https://github.com/malonge/RagTag
+RagTag scaffolds assemblies based on a reference and can correct missasemblies. We used the "correct" option with the -j flag to protect the contigs containing the transgene insertions from being incorrectly corrected when compared to the reference. 
+For UA44 ragtagskip.txt listed contig_59
+For BY250 ragtagskip.txt listed contig_86
 ```{}
-ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  UA44_flye_keptcontigs.fasta # ragtagskip.txt lists contig_59
-ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  BY250_flye_keptcontigs.fasta # ragtagskip.txt lists contig_86
-
+ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  UA44_flye_keptcontigs.fasta 
+ragtag.py correct -j ragtagskip.txt Caenorhabditis_elegans.WBcel235.dna.toplevel.fa  BY250_flye_keptcontigs.fasta 
 ```

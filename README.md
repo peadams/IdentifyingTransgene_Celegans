@@ -1,6 +1,6 @@
 # Identifying transgene insertions in *Caenorhabditis elegans* genomes with Oxford Nanopore sequencing
 
-Paula E. Adams*, Jennifer L. Thies, John M. Sutton, Josh D. Millwood, Guy A. Caldwell, Kim A. Caldwell, and Janna L. Fierst
+Paula E. Adams*, Jennifer L. Thies, John M. Sutton, Joshua D. Millwood, Guy A. Caldwell, Kim A. Caldwell, and Janna L. Fierst
 
  *Corresponding Author: pea0013@auburn.edu 
 

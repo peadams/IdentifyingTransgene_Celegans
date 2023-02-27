@@ -9,14 +9,14 @@ Paula E. Adams*, Jennifer L. Thies, John M. Sutton, Joshua D. Millwood, Guy A. C
 Here, we sequence and assemble two transgenic strains of *Caenorhabditis elegans* used in neurodegeneration research, BY250 and UA44. We use a combination of empirically generated ONT long-read DNA sequences, publicly available Illumina short-read DNA libraries, simulated Illumina transgene libraries and reference-based scaffolding to assemble high-quality genome sequences. Our method achieves chromosome-level assemblies with high similarity to the *C. elegans* N2 reference genome. We identify the locations of the transgene insertions and confirm that all transgene sequences were inserted in intergenic regions, leaving the organismal gene content intact. Our work demonstrates that long-read sequencing is a fast, cost-effective way to assemble genome sequences and aid in the identification of transgenic insertions in model organism research.
 
 ## Data Availability 
-Assembled Genomes and Oxford Nanopore Reads
+Assembled Genomes* and Oxford Nanopore Reads
 |||
 | --- | --- |
 | UA44 | [BioProject:PRJNA627736](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736) |
 | BY250 | [BioProject:PRJNA627737](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737) |
-| | [Genome Assemblies*](https://osf.io/myxat/) |
+| | [OSF: Genome Assemblies](https://osf.io/myxat/) |
 
-*Genomes still processing at NCBI
+*Genomes still processing at NCBI. Currently available at OSF link above
 
 ## Analyses
 

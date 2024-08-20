@@ -14,8 +14,8 @@ Assembled Genomes* and Oxford Nanopore Reads
 | --- | --- |
 | UA44 | [BioProject:PRJNA627736](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736) |
 | | [gff file](./UA44.gff.zip)
-| --- | --- |
 | BY250 | [BioProject:PRJNA627737](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737) |
+| | [gff file](./BY250.gff.zip)
 | | [OSF: Genome Assemblies](https://osf.io/myxat/) |
 
 *Genomes still processing at NCBI. Currently available at OSF link above
@@ -125,6 +125,13 @@ busco -c 12 -m genome -i ragtag.scaffold.fasta -o busco_NEW_BY250_ragtag_correct
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff  -u UA44_ragtag_skip_unmapped_features.txt   -m minimap2 ragtag.scaffold.fasta  Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```
+
+Only 91 (UA44) and 92 (BY250) genes were missing from our genome annotations compared to the reference. Missing gene lists were compared to WormBase Parasite BioMart [Howe et al., 2017] to asess gene function and location. 
+|||
+| --- | --- |
+| Missing Genes BioMart Information| [UA44](./UA44_MissingGenes_BioMart.txt)
+| | [BY250](./BY250_MissingGenes_BioMart.txt)
+
 
 ### Create Bed file for genes using BEDOPS [gff2bed](https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html): 
 Example shown with UA44 sequence data 

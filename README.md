@@ -11,12 +11,11 @@ Here, we sequence and assemble two transgenic strains of *Caenorhabditis elegans
 ## Data Availability 
 Assembled Genomes* and Oxford Nanopore Reads
 |||
-| --- | --- |
-| UA44 | [BioProject:PRJNA627736](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736) |
-| | [gff file](./UA44.gff.zip)
-| BY250 | [BioProject:PRJNA627737](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737) |
-| | [gff file](./BY250.gff.zip)
-| | [OSF: Genome Assemblies](https://osf.io/myxat/) |
+| --- | --- | --- |
+| UA44 | [BioProject:PRJNA627736](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736) | [gff file](./UA44.gff.zip) |
+
+| BY250 | [BioProject:PRJNA627737](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737) | [gff file](./BY250.gff.zip) |
+| [OSF: Genome Assemblies](https://osf.io/myxat/) | | |
 
 *Genomes still processing at NCBI. Currently available at OSF link above
 

@@ -13,7 +13,7 @@ Assembled Genomes* and Oxford Nanopore Reads
 |||
 | --- | --- |
 | UA44 | [BioProject:PRJNA627736](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627736) |
-| --- | [gff file](./IdentifyingTransgene_Celegans/UA44.gff.zip)
+| | [gff file](./UA44.gff.zip)
 | --- | --- |
 | BY250 | [BioProject:PRJNA627737](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA627737) |
 | | [OSF: Genome Assemblies](https://osf.io/myxat/) |

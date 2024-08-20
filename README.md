@@ -126,11 +126,7 @@ liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o UA44_ragtag_skip.gff  -u
 liftoff -g Caenorhabditis_elegans.WBcel235.100.gff3  -o BY250_ragtag_skip.gff -u BY250_ragtag_skip_unmapped_features.txt  -m minimap2 ragtag.scaffold.fasta Caenorhabditis_elegans.WBcel235.dna.toplevel.fa
 ```
 
-Only 91 (UA44) and 92 (BY250) genes were missing from our genome annotations compared to the reference. Missing gene lists were compared to WormBase Parasite BioMart [Howe et al., 2017] to asess gene function and location. 
-|||
-| --- | --- |
-| Missing Genes BioMart Information| [UA44](./UA44_MissingGenes_BioMart.txt)
-| | [BY250](./BY250_MissingGenes_BioMart.txt)
+Only 91 (UA44) and 92 (BY250) genes were missing from our genome annotations compared to the reference. Missing gene lists were compared to WormBase Parasite BioMart [Howe et al., 2017](10.1016/j.molbiopara.2016.11.005) to asess gene function and location. Missing Genes BioMart Information can be found here:  [UA44](./UA44_MissingGenes_BioMart.txt) & [BY250](./BY250_MissingGenes_BioMart.txt).
 
 
 ### Create Bed file for genes using BEDOPS [gff2bed](https://bedops.readthedocs.io/en/latest/content/reference/file-management/conversion/gff2bed.html): 
